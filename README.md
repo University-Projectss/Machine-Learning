@@ -10,4 +10,6 @@ https://www.tensorflow.org
 
 ## SmartWebcam
 
-Fist beginner project using a pre-trained object detector model. I did something similar 3 years ago thanks to https://www.youtube.com/@TheCodingTrain
+Fist beginner project using a pre-trained object detector model. I did something similar 3 years ago using ml5.js thanks to https://www.youtube.com/@TheCodingTrain
+
+Very easy project with minimal ML implementation, but good to refresh my memory
