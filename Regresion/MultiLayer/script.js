@@ -10,7 +10,7 @@ for (let i = 0; i < INPUTS.length; i++) {
   OUTPUTS.push(INPUTS[i] * INPUTS[i]);
 }
 
-const LEARNING_RATE = 0.01;
+const LEARNING_RATE = 0.0001;
 const OPTMIZER = tf.train.sgd(LEARNING_RATE);
 
 //Shuffle both array in the same way, so the inputs will still corespond to outputs
@@ -49,7 +49,14 @@ INPUT_TENSOR.dispose();
 //the input of the next layer
 const model = tf.sequential();
 
-model.add(tf.layers.dense({ inputShape: [1], units: 1 }));
+//input layer consist of 25 neurons
+model.add(tf.layers.dense({ inputShape: [1], units: 25, activation: "relu" }));
+
+//hidden layer consist of 5 neurons
+model.add(tf.layers.dense({ units: 5, activation: "relu" }));
+
+//output layer consist of 1 neuron
+model.add(tf.layers.dense({ units: 1 }));
 
 model.summary();
 
@@ -58,7 +65,7 @@ const evaluate = () => {
   //using tidy to automaticaly dispose the tensors
   tf.tidy(() => {
     let newInput = normalize(
-      tf.tensor1d([7]),
+      tf.tensor1d([25]),
       FEATURE_RESULTS.MIN_VALUES,
       FEATURE_RESULTS.MAX_VALUES
     );
@@ -83,14 +90,14 @@ const train = async () => {
     FEATURE_RESULTS.NORMALIZED_VALUES,
     OUTPUT_TENSOR,
     {
-      callbacks: {
-        onEpochEnd: (epoch, logs) => {
-          if (epoch === 170) {
-            OPTMIZER.setLearningRate(LEARNING_RATE / 2);
-          }
-          console.log("Data for epoch: " + epoch, Math.sqrt(logs.loss));
-        },
-      },
+      // callbacks: {
+      //   onEpochEnd: (epoch, logs) => {
+      //     // if (epoch === 170) {
+      //     //   OPTMIZER.setLearningRate(LEARNING_RATE / 2);
+      //     // }
+      //     console.log("Data for epoch: " + epoch, Math.sqrt(logs.loss));
+      //   },
+      // },
       suffle: true, //avoid learning from the data order
       batchSize: 2,
       epochs: 200, //go over data 200 times
@@ -105,7 +112,7 @@ const train = async () => {
       Math.sqrt(results.history.loss[results.history.loss.length - 1])
   );
 
-  await model.save("localstorage://demo/FirstNeuronModel");
+  // await model.save("localstorage://demo/FirstNeuronModel");
   evaluate();
 };
 
