@@ -4,4 +4,4 @@ This was a project from college. We had images from 96 classes, wich where gener
 
 Anyway, I built a CNN with TensorFlow and I got an accuracy of 90%.
 
-For more info, check report.pdf, wich is writen in romanian.
+Working on documentation.
