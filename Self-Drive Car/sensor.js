@@ -68,9 +68,9 @@ class Sensor {
     for (let i = 0; i < this.rayCount; i++) {
       let end = this.rays[i][1];
 
-      //   if (this.readings[i]) {
-      //     end = this.readings[i];
-      //   }
+      if (this.readings[i]) {
+        end = this.readings[i];
+      }
 
       ctx.beginPath();
       ctx.lineWidth = 2;
@@ -78,6 +78,11 @@ class Sensor {
       ctx.moveTo(this.rays[i][0].x, this.rays[i][0].y);
       ctx.lineTo(end.x, end.y);
       ctx.stroke();
+
+      ctx.beginPath();
+      ctx.fillStyle = "red";
+      ctx.arc(end.x, end.y, 5, 0, 2 * Math.PI);
+      ctx.fill();
 
       //   ctx.beginPath();
       //   ctx.lineWidth = 2;
