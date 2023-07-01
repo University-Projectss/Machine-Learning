@@ -1,0 +1,6 @@
+This one was made after a tutorial from freecodecamp (https://www.youtube.com/watch?v=Rs_rAxEsAvI&list=PLWKjhJtqVAblStefaz_YOVpDWqcRScc2s&index=3)
+
+It is a neural network that learns to drive a car, maybe in the future I'll make it
+to learn paralel parking
+
+This project will be coded from scratch, no libraries.
